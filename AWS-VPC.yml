@@ -1,0 +1,17 @@
+
+## Sunday June 07 2020 16:30 IST 
+## Purpose ## Ansible-playbook to Launch VPC   ##
+## Created by Nikhil Kulkarni ###
+##########################################################################################################
+
+# Assuminig that you have already configured AWS CLI.
+---
+- hosts: localhost
+  connection: local
+  tasks:
+    - name: Create vpc
+      ec2_vpc_net:    
+        name: "Ansible VPC"
+        state: present
+        cidr_block: 10.10.0.0/16 
+        region: ap-south-1
