@@ -1,0 +1,38 @@
+## Sunday June 07 2020 16:10 IST 
+## Purpose ## Ansible-playbook to configure Apache web server (HTTP server)   ##
+## Created by Nikhil Kulkarni ###
+##########################################################################################################
+
+---
+- hosts: appserver  #hostname of your web server
+  user: ansadm      # Ansible user
+  become: yes
+  become_method: sudo
+  tasks:
+
+    - name: 1. Install latest http
+      yum: name=httpd state=present
+
+    - name: start httpd service
+      service: name=httpd state=started enabled=yes
+
+    - name: copy the index.html file.
+      copy: src=/tmp/index.html dest=/var/www/html/index.html mode=664
+
+    - name: Create a file.
+      file:
+        path: /var/www/html/index.html
+        state: touch
+        mode: 0777
+
+    - name: Add content to the file.
+      copy:
+        dest: /var/www/html/index.html
+        content: |
+                 <html>
+                        <head>
+                          <title>Appserver</title>
+                        </head>
+                          <body>My Ansible App server.
+                          </body>
+                 </html>
