@@ -16,9 +16,6 @@
     - name: start httpd service
       service: name=httpd state=started enabled=yes
 
-    - name: copy the index.html file.
-      copy: src=/tmp/index.html dest=/var/www/html/index.html mode=664
-
     - name: Create a file.
       file:
         path: /var/www/html/index.html
